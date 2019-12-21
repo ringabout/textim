@@ -18,6 +18,9 @@ import textim, docx, strutils
 # echo text2
 import tables
 var tf: TfIdf
-parseWords(tf, "t1.docx")
-echo tf.data[0].len
+addDocument(tf, "t1.docx")
+addDocument(tf, "t2.docx")
+countDocument(tf)
+# echo tf.data[0].type
+echo tf
 
