@@ -19,8 +19,7 @@ proc parseWords*(tf: var TfIdf, s: string)
 
 proc findFileExt(fileName: string): FileKind =
   let fileSplit = splitFile(fileName)
-  echo fileSplit.ext
-  case fileSplit.ext:
+  case fileSplit.ext
   of ".txt":
     result = Txt
   of ".docx":
@@ -29,7 +28,7 @@ proc findFileExt(fileName: string): FileKind =
     result = None
 
 proc parseFile*(fileName: string): string =
-  case findFileExt(fileName):
+  case findFileExt(fileName)
   of Txt:
     let 
       f = open(fileName, fmRead)
