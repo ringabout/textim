@@ -18,6 +18,7 @@ type
 proc parseWords*(tf: var TfIdf, s: string)
 
 proc findFileExt(fileName: string): FileKind =
+  ## Finds file's extension name.
   let fileSplit = splitFile(fileName)
   case fileSplit.ext
   of ".txt":
@@ -28,22 +29,17 @@ proc findFileExt(fileName: string): FileKind =
     result = None
 
 proc parseFile*(fileName: string): string =
+  ## Returns the contents of the file.
   case findFileExt(fileName)
   of Txt:
-    let 
-      f = open(fileName, fmRead)
-    result = f.readAll()
-    f.close()
+    result = readFile(filename)
   of Docx:
     result = parseDocument(fileName)
   else:
-    let 
-      f = open(fileName, fmRead)
-    result = f.readAll()
-    f.close()
-
-
+    result = readFile(filename)
+ 
 proc parseWords(tf: var TfIdf, s: string) =
+  ## Calculates words.
   var
     pos = 0
     word: string
@@ -65,13 +61,16 @@ proc parseWords(tf: var TfIdf, s: string) =
     tf.tdIdf[current].occur += 1
 
 proc addDocument*(tf: var TfIdf, fileName: string) =
+  ## Adds new contents.
   let s = parseFile(fileName)
   parseWords(tf, s)
 
 proc addString*(tf: var TfIdf, s: string) =
+  ## Adds new contents.
   parseWords(tf, s)
 
 proc countDocument*(tf: var TfIdf) =
+  ## Calculates scores.
   let size = tf.total.len
   for idx in 0 ..< tf.tdIdf.len:
     for k, v in tf.tdIdf[idx].data.mpairs:
