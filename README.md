@@ -1,6 +1,19 @@
 # textim
 Text process utils writen in Nim.
 
+# Examples
+
+```nim
+import textim
+
+
+var tf: TfIdf
+addDocument(tf, "t1.docx")
+addDocument(tf, "t2.docx")
+countDocument(tf)
+echo tf
+```
+
 # API: textim
 
 ```nim
