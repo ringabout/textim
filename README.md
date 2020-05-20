@@ -1,7 +1,7 @@
 # textim
 Text process utils writen in Nim.
 
-# Examples
+## Examples
 
 ```nim
 import textim
